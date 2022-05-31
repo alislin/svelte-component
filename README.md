@@ -1,0 +1,2 @@
+# svelte-component
+svelte component
