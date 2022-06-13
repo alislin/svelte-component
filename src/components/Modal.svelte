@@ -9,11 +9,12 @@
     export let isCloseShown: boolean = true;
     /** Modal 外点击关闭（默认：开） */
     export let isCloseByMask: boolean = true;
-    export let onConfirm: () => void = () => {};
+    export let onClose: () => void = () => {};
 
     function closeByMask() {
         if (isCloseByMask) {
             isShown = false;
+            onClose();
         }
     }
 
