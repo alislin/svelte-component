@@ -11,10 +11,20 @@
         key: allLabel,
         value: null,
     };
+    /** 选择时样式 */
+    export let styleOnSelected: string = "";
+    /** 选择时处理 */
     export let onChange: () => void = () => {};
+    $: selectedCss = () => {
+        if (!styleOnSelected || styleOnSelected == null) return "";
+        if (value != allkey.value) {
+            return styleOnSelected;
+        }
+        return "";
+    };
 </script>
 
-<select bind:value on:change={onChange}>
+<select bind:value on:change={onChange} class={selectedCss()}>
     {#if allkey != null}
         <option value={allkey.value}>{allkey.key}</option>
     {/if}

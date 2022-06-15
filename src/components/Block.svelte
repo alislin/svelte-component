@@ -1,12 +1,39 @@
 <script lang="ts">
+	import { beforeUpdate } from "svelte";
+
+	/** 标题 */
 	export let title: string = "";
+	/** 说明 */
 	export let description: string = "";
+	/** 是否显示 */
 	export let isShown: boolean = false;
+	/** 是否全屏 */
+	export let isFull: boolean = false;
+
+	beforeUpdate(() => {
+		setBlockBody();
+	});
+
+	function setBlockBody() {
+		if(isShown) {
+			document.body.style.overflow = "auto";
+		}
+
+		if (isFull) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "auto";
+		}
+	}
+
+	function fullCss(){
+		return isFull ? "block-full" : "";
+	}
 </script>
 
 {#if isShown}
-	<div class="block">
-		<div class="mask" ></div>
+	<div class="block {fullCss()}">
+		<div class="mask" />
 		<div class="content">
 			<div class="lds-ring">
 				<div />
@@ -68,10 +95,18 @@
 		}
 	}
 
+	.block-full {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
 	.block {
 		position: absolute;
 		width: 100%;
-		height: 100vh;
+		height: 100%;
+		// height: 100vh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -83,7 +118,7 @@
 			width: 100%;
 			height: 100%;
 			position: absolute;
-		}
+	}
 
 		.content {
 			display: flex;
@@ -95,8 +130,7 @@
 			padding: 5px 24px;
 			color: $font-color;
 			border-radius: 3px;
-			box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%),
-				0 6px 20px 0 rgb(0 0 0 / 19%);
+			box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 			z-index: 999;
 			.content-text {
 				display: flex;
@@ -114,6 +148,5 @@
 				}
 			}
 		}
-
 	}
 </style>
