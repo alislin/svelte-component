@@ -20,6 +20,9 @@
         if (s == Styles.Primary) {
             return "tag-primary";
         }
+        if(s==Styles.Secondary){
+            return "tag-secondary";
+        }
         if (s == Styles.Success) {
             return "tag-success";
         }
@@ -76,6 +79,16 @@
             background-color: transparent;
             border-color: $primary;
             color: $primary;
+        }
+    }
+    .tag-secondary{
+        background-color: $secondary;
+        border-color: $secondary;
+        color: $secondary-color;
+        &-flat{
+            background-color: transparent;
+            border-color: $secondary;
+            color: $secondary;
         }
     }
     .tag-success {

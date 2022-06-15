@@ -1,17 +1,20 @@
 <script lang="ts">
     import type { SelectItem } from "./selector/SelectItem";
-
+    /** 选项列表 */
     export let items: SelectItem[] = [];
+    /** 选择项 */
     export let value: any;
+    /** 空值选项显示名称 */
     export let allLabel: string = "全部";
+    /** 空值选项（为 null 不显示） */
     export let allkey: SelectItem = {
         key: allLabel,
         value: null,
     };
-    export let onChange:()=>void;
+    export let onChange: () => void = () => {};
 </script>
 
-<select bind:value on:change="{onChange}" >
+<select bind:value on:change={onChange}>
     {#if allkey != null}
         <option value={allkey.value}>{allkey.key}</option>
     {/if}
