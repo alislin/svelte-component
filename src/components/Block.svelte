@@ -15,7 +15,7 @@
 	});
 
 	function setBlockBody() {
-		if(isShown) {
+		if (isShown) {
 			document.body.style.overflow = "auto";
 		}
 
@@ -26,28 +26,31 @@
 		}
 	}
 
-	function fullCss(){
+	function fullCss() {
 		return isFull ? "block-full" : "";
 	}
 </script>
 
-{#if isShown}
-	<div class="block {fullCss()}">
-		<div class="mask" />
-		<div class="content">
-			<div class="lds-ring">
-				<div />
-				<div />
-				<div />
-				<div />
-			</div>
-			<div class="content-text">
-				<div class="title">{title}</div>
-				<div class="description">{description}</div>
+<div class="block-wrap">
+	{#if isShown}
+		<div class="block {fullCss()}">
+			<div class="mask" />
+			<div class="content">
+				<div class="lds-ring">
+					<div />
+					<div />
+					<div />
+					<div />
+				</div>
+				<div class="content-text">
+					<div class="title">{title}</div>
+					<div class="description">{description}</div>
+				</div>
 			</div>
 		</div>
-	</div>
-{/if}
+	{/if}
+	<slot />
+</div>
 
 <style lang="scss">
 	$load-width: 24px;
@@ -94,9 +97,13 @@
 			transform: rotate(360deg);
 		}
 	}
-
+	.block-wrap {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
 	.block-full {
-		position: fixed;
+		position: fixed!important;
 		top: 0;
 		left: 0;
 		right: 0;
@@ -106,11 +113,12 @@
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		// height: 100vh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		z-index: 998;
+
+		// border: 1px solid black;
 
 		.mask {
 			background-color: white;
@@ -118,7 +126,7 @@
 			width: 100%;
 			height: 100%;
 			position: absolute;
-	}
+		}
 
 		.content {
 			display: flex;
